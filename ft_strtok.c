@@ -27,3 +27,19 @@ char *ft_strtok(char *str, const char *delim)
     }
     return (NULL);
 }
+
+// int	main(void)
+// {
+// 	char str[] = "hello world";
+// 	char delim[] = " ";
+// 	char *token;
+
+// 	token = malloc(sizeof(char) * ft_strlen(str) + 1);
+// 	token = ft_strtok(str, delim);
+// 	while (token != NULL)
+// 	{
+// 		printf("%s\n", token);
+// 		token = ft_strtok(NULL, delim);
+// 	}
+// 	return (0);
+// }

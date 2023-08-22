@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: djin <djin@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 21:28:14 by djin              #+#    #+#             */
-/*   Updated: 2023/04/30 21:56:21 by djin             ###   ########.fr       */
+/*   Updated: 2023/08/21 07:49:55 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,17 @@ char	*ft_strdup(const char *src)
 	return (dst);
 }
 
-/*int	main(void)
-{
-	char str[] = "Hello";
+// int	main(void)
+// {
+// 	char *str = "Hello";
+// 	char *paste;
+// 	int	i;
 
-	printf("%s\n", ft_strdup(str));
-}*/
+// 	i = 0;
+// 	while (str[i])
+// 	{
+// 		paste[i] = ft_strdup(str[i]);
+// 		i++;
+// 	}
+// 	printf("%s\n", paste);
+// }
