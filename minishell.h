@@ -33,14 +33,14 @@ typedef struct s_token
 char		*ft_strtok(char *str, const char *delim);
 
 // Token functions
-t_token		*first_last_token(t_token *tokens, bool is_last);
+t_token		*first_last_token(t_token **tokens, bool is_last);
 t_token		*token_join(t_token *tokens, int type);
 t_token 	*create_token(int type);
 void		ft_lstclear_token(t_token **lst, void (*del)(void *));
-int			check_type(char *str, t_token *tokens);
-void		is_symbol(char *str, int *i, t_token *tokens);
-void		is_word(char *str, int *i, t_token *tokens);
+void		check_type(char *input, t_token *tokens);
+void		is_symbol(char *str, int *i, t_token **tokens);
+void		is_word(char *str, int *i, t_token **tokens);
 void		space_skip(char *str, int *i);
 
-void	print_token(t_token *tokens);
+void		print_token(t_token *tokens, bool to_first, char *str);
 #endif

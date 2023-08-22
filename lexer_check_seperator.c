@@ -1,19 +1,19 @@
 #include "minishell.h"
 
-void	 is_symbol(char *str, int *i, t_token *tokens)
+void	 is_symbol(char *str, int *i, t_token **tokens)
 {
 	if (str[*i] == '|')
 	{
 		if (str[*i + 1] == '|')
 		{
-			(tokens)->type = OR;
-			tokens->cmd = ft_strdup("||");
+			(*tokens)->type = OR;
+			(*tokens)->cmd = ft_strdup("||");
 			(*i) += 2;
 		}
 		else
 		{
-			(tokens)->type = PIPE;
-			tokens->cmd = ft_strdup("|");
+			(*tokens)->type = PIPE;
+			(*tokens)->cmd = ft_strdup("|");
 			(*i)++;
 		}
 	}
@@ -23,14 +23,14 @@ void	 is_symbol(char *str, int *i, t_token *tokens)
 		{
 			if (str[*i] == '<')
 			{
-				(tokens)->type = REDIR_IN;
-				tokens->cmd = ft_strdup("<");
+				(*tokens)->type = REDIR_IN;
+				(*tokens)->cmd = ft_strdup("<");
 				(*i)++;
 			}
 			else
 			{
-				(tokens)->type = HERE_DOC;
-				tokens->cmd = ft_strdup("<<");
+				(*tokens)->type = HERE_DOC;
+				(*tokens)->cmd = ft_strdup("<<");
 				(*i) += 2;
 			}
 		}
@@ -38,14 +38,14 @@ void	 is_symbol(char *str, int *i, t_token *tokens)
 		{
 			if (str[*i] == '>')
 			{
-				(tokens)->type = REDIR_OUT;
-				tokens->cmd = ft_strdup(">");
+				(*tokens)->type = REDIR_OUT;
+				(*tokens)->cmd = ft_strdup(">");
 				(*i)++;
 			}
 			else
 			{
-				(tokens)->type = REDIR_OUT_APPEND;
-				tokens->cmd = ft_strdup(">>");
+				(*tokens)->type = REDIR_OUT_APPEND;
+				(*tokens)->cmd = ft_strdup(">>");
 				(*i) += 2;
 			}
 		}
@@ -54,23 +54,23 @@ void	 is_symbol(char *str, int *i, t_token *tokens)
 	{
 		if (str[*i] == '(')
 		{
-			(tokens)->type = OPEN_BRACKET;
-			tokens->cmd = ft_strdup("(");
+			(*tokens)->type = OPEN_BRACKET;
+			(*tokens)->cmd = ft_strdup("(");
 		}
 		else if (str[*i] == ')')
 		{
-			(tokens)->type = CLOSE_BRACKET;
-			tokens->cmd = ft_strdup(")");
+			(*tokens)->type = CLOSE_BRACKET;
+			(*tokens)->cmd = ft_strdup(")");
 		}
 		else if (str[*i] == '{')
 		{
-			(tokens)->type = OPEN_BRACE;
-			tokens->cmd = ft_strdup("{");
+			(*tokens)->type = OPEN_BRACE;
+			(*tokens)->cmd = ft_strdup("{");
 		}
 		else
 		{
-			(tokens)->type = CLOSE_BRACE;
-			tokens->cmd = ft_strdup("}");
+			(*tokens)->type = CLOSE_BRACE;
+			(*tokens)->cmd = ft_strdup("}");
 		}
 		(*i)++;
 	}
@@ -78,43 +78,43 @@ void	 is_symbol(char *str, int *i, t_token *tokens)
 	{
 		if (str[*i + 1] == '&')
 		{
-			(tokens)->type = DOUBLE_AND;
-			tokens->cmd = ft_strdup("&&");
+			(*tokens)->type = DOUBLE_AND;
+			(*tokens)->cmd = ft_strdup("&&");
 			(*i) += 2;
 		}
 		else
 		{
-			(tokens)->type = ANDPARSEN; //ggwp, autolose, next game
-			tokens->cmd = ft_strdup("&");
+			(*tokens)->type = ANDPARSEN; //ggwp, autolose, next game
+			(*tokens)->cmd = ft_strdup("&");
 			i++;
 		}
 	}
 	else if (str[*i] == '$')
 	{
-		(tokens)->type = DOLLAR; // financial issue?
-		tokens->cmd = ft_strdup("$");
+		(*tokens)->type = DOLLAR; // financial issue?
+		(*tokens)->cmd = ft_strdup("$");
 		(*i)++;
 	}
 	else if (str[*i] == '\'' || str[*i] == '\"')
 	{
 		if (str[*i] == '\'')
 		{
-			(tokens)->type = BOO_NO_EXPANSION;
-			(tokens)->cmd = ft_strdup("\'");
+			(*tokens)->type = BOO_NO_EXPANSION;
+			(*tokens)->cmd = ft_strdup("\'");
 		}
 		else
 		{
-			(tokens)->type = DOMESTIC_EXPANSION;
-			(tokens)->cmd = ft_strdup("\"");
+			(*tokens)->type = DOMESTIC_EXPANSION;
+			(*tokens)->cmd = ft_strdup("\"");
 		}
 		(*i)++;
 	}
-	tokens = token_join(tokens, tokens->type);
-	printf("%p\n", tokens);
-	(tokens) = (tokens)->next;
+	(*tokens) = token_join((*tokens), (*tokens)->type);
+	// printf("%p\n", *tokens);
+	(*tokens) = (*tokens)->next;
 }
 
-void	is_word(char *str, int *i, t_token *tokens)
+void	is_word(char *str, int *i, t_token **tokens)
 {
 	int	j;
 
@@ -125,10 +125,10 @@ void	is_word(char *str, int *i, t_token *tokens)
 		&& str[*i + j] != '\'' && str[*i + j] != '\"' && str[*i + j] != '\\'
 		&& str[*i + j] != '/' && str[*i + j] != '{' && str[*i + j] != '}')
 		j++;
-	(tokens)->type = WORD;
-	(tokens)->cmd = ft_substr(str, *i, j);
-	tokens = token_join(tokens, WORD);
-	printf("%p\n", tokens);
+	(*tokens)->type = WORD;
+	(*tokens)->cmd = ft_substr(str, *i, j);
+	(*tokens) = token_join((*tokens), WORD);
+	// printf("%p\n", &tokens);
 	(*i) += j;
-	(tokens) = (tokens)->next;
+	(*tokens) = (*tokens)->next;
 }

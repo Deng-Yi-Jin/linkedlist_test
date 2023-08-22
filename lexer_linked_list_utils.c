@@ -5,13 +5,13 @@ t_token	*token_join(t_token *tokens, int type)
 {
 	t_token	*new_token;
 
-	new_token = tokens;
+	new_token = (tokens);
 	if (!new_token)
 		return (NULL);
 	if (!tokens)
 		return (new_token);
-	tokens->next = new_token;
-	new_token -> prev = tokens;
+	(tokens)->next = new_token;
+	new_token -> prev = (tokens);
 	return (new_token);
 }
 
@@ -29,25 +29,21 @@ t_token	*create_token(int type)
 	return (token);
 }
 
-t_token *first_last_token(t_token *tokens, bool is_last)
+t_token *first_last_token(t_token **tokens, bool is_last)
 {
-	if (!tokens)
+	if (!(*tokens))
 		return (NULL);
 	if (is_last)
 	{
-		while (tokens->next)
-		{
-			tokens = tokens->next;
-		}
-		return (tokens);
+		while ((*tokens)->next)
+			(*tokens) = (*tokens)->next;
+		return ((*tokens));
 	}
 	else
 	{
-		while (tokens->prev != NULL)
-		{
-			tokens = tokens->prev;
-		}
-		return (tokens);
+		while ((*tokens)->prev)
+			(*tokens) = (*tokens)->prev;
+		return ((*tokens));
 	}
 }
 

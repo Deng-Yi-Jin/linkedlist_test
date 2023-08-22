@@ -8,24 +8,11 @@ void	del(void *content)
 void	parse_input(char *input, char **envp)
 {
 	t_token *tokens;
-	int		i;
 
-	i = 0;
-	while (input[i])
-	{
-		tokens = create_token(0);
-		if (ft_isalpha(input[i]) == true)
-			is_word(input, &i, tokens);
-		else if (input[i] == ' ')
-			space_skip(input, &i);
-		else if (input[i] == '|' || input[i] == '<' || input[i] == '>' || input[i] == '&'
-			|| input[i] == '(' || input[i] == ')' || input[i] == '$' 
-			|| input[i] == '\'' || input[i] == '\"'|| input[i] == '\\'
-			|| input[i] == '/' || input[i] == '{' || input[i] == '}')
-			is_symbol(input, &i, tokens);
-	}
-	first_last_token(tokens, false);
-	ft_lstclear_token(&tokens, del);
+	check_type(input, tokens);
+	// print_token(tokens, true, "tokens");
+	// first_last_token(&tokens, false);
+	// ft_lstclear_token(&tokens, del);
 }
 
 int	main(int argc, char **argv, char **envp)
