@@ -42,5 +42,8 @@ void		is_symbol(char *str, int *i, t_token **tokens);
 void		is_word(char *str, int *i, t_token **tokens);
 void		space_skip(char *str, int *i);
 
+// Parsing functions
+void		check_error(t_token *tokens);
+
 void		print_token(t_token *tokens, bool to_first, char *str);
 #endif

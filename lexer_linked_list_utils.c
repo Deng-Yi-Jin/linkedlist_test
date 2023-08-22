@@ -12,6 +12,7 @@ t_token	*token_join(t_token *tokens, int type)
 		return (new_token);
 	(tokens)->next = new_token;
 	new_token -> prev = (tokens);
+	// printf("new_token->prev->type: %d\n", new_token->prev->type);
 	return (new_token);
 }
 

@@ -82,11 +82,11 @@ void	 is_symbol(char *str, int *i, t_token **tokens)
 			(*tokens)->cmd = ft_strdup("&&");
 			(*i) += 2;
 		}
-		else
+		else if (str[*i] == '&' && str[*i + 1] != '&')
 		{
 			(*tokens)->type = ANDPARSEN; //ggwp, autolose, next game
 			(*tokens)->cmd = ft_strdup("&");
-			i++;
+			(*i)++;
 		}
 	}
 	else if (str[*i] == '$')
