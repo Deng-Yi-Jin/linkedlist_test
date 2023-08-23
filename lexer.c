@@ -7,9 +7,7 @@ void	del(void *content)
 
 void	parse_input(char *input, char **envp)
 {
-	t_token *tokens;
-
-	check_type(input, tokens);
+	check_type(input);
 	// print_token(tokens, true, "tokens");
 	// first_last_token(&tokens, false);
 	// ft_lstclear_token(&tokens, del);

@@ -2,6 +2,8 @@
 
 void	 is_symbol(char *str, int *i, t_token **tokens)
 {
+	(*tokens) = create_token(0, (*tokens));
+	// printf("\ntokens->prev: %p\n", (*tokens)->prev);
 	if (str[*i] == '|')
 	{
 		if (str[*i + 1] == '|')
@@ -109,9 +111,10 @@ void	 is_symbol(char *str, int *i, t_token **tokens)
 		}
 		(*i)++;
 	}
-	(*tokens) = token_join((*tokens), (*tokens)->type);
-	// printf("%p\n", *tokens);
+	token_lstadd_back(tokens, (*tokens));
+	// printf("\ntokens->current: %p\n", *tokens);
 	(*tokens) = (*tokens)->next;
+	// printf("\nNext address: %p\n", *tokens);
 }
 
 void	is_word(char *str, int *i, t_token **tokens)
@@ -119,6 +122,9 @@ void	is_word(char *str, int *i, t_token **tokens)
 	int	j;
 
 	j = 0;
+	// printf("\ntokens->prev: %p\n", (*tokens)->prev);
+	(*tokens) = create_token(0, (*tokens));
+	// (*tokens)->prev = NULL;
 	while (str[*i + j] && str[*i + j] != ' ' && str[*i + j] != '|'
 		&& str[*i + j] != '<' && str[*i + j] != '>' && str[*i + j] != '&'
 		&& str[*i + j] != '(' && str[*i + j] != ')' && str[*i + j] != '$'
@@ -127,8 +133,9 @@ void	is_word(char *str, int *i, t_token **tokens)
 		j++;
 	(*tokens)->type = WORD;
 	(*tokens)->cmd = ft_substr(str, *i, j);
-	(*tokens) = token_join((*tokens), WORD);
-	// printf("%p\n", &tokens);
+	token_lstadd_back(tokens, (*tokens));
+	// printf("\ntokens->current: %p\n", *tokens);
 	(*i) += j;
 	(*tokens) = (*tokens)->next;
+	// printf("\nNext address: %p\n", *tokens);
 }

@@ -1,35 +1,52 @@
 #include "minishell.h"
 
-t_token	*token_join(t_token *tokens, int type)
-
+// adds a token to the front of the linked list
+void	token_lstadd_back(t_token **lst, t_token *new)
 {
-	t_token	*new_token;
+	t_token	*tmp;
+	t_token *last_token;
 
-	new_token = (tokens);
-	if (!new_token)
-		return (NULL);
+	if (!lst || !new)
+		return ;
+	tmp = *lst;
+	if (lst)
+	{
+		if (tmp)
+		{
+			last_token = find_last_token(tmp);
+			last_token -> next = new;
+			new -> prev = last_token;
+		}
+		else
+			*lst = new;
+	}
+}
+
+// find last token in linked list
+t_token	*find_last_token(t_token *lst)
+{
+	t_token	*newnode;
+
+	newnode = lst;
+	while (newnode != NULL && newnode -> next != NULL)
+		newnode = newnode -> next;
+	return (newnode);
+}
+
+// creates a new token
+t_token	*create_token(int type, t_token *tokens)
+{
+	tokens = malloc(sizeof(t_token));
 	if (!tokens)
-		return (new_token);
-	(tokens)->next = new_token;
-	new_token -> prev = (tokens);
-	// printf("new_token->prev->type: %d\n", new_token->prev->type);
-	return (new_token);
-}
-
-t_token	*create_token(int type)
-{
-	t_token	*token;
-
-	token = malloc(sizeof(t_token));
-	if (!token)
 		return (NULL);
-	token->type = type;
-	token->cmd = NULL;
-	token->next = NULL;
-	token->prev = NULL;
-	return (token);
+	tokens->type = type;
+	tokens->cmd = NULL;
+	tokens->next = NULL;
+	tokens->prev = NULL;
+	return (tokens);
 }
 
+// finds first or last token in linked list
 t_token *first_last_token(t_token **tokens, bool is_last)
 {
 	if (!(*tokens))
