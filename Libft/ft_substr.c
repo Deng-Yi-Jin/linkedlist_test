@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: djin <djin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 22:00:09 by djin              #+#    #+#             */
-/*   Updated: 2023/08/21 09:03:55 by codespace        ###   ########.fr       */
+/*   Updated: 2023/09/02 22:40:46 by djin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,5 +44,5 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 
 // int	main(void)
 // {
-// 	printf("%s", ft_substr("Hello There", 2, 5));
+// 	printf("%s", ft_substr("      #    ", 6, 1));
 // }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: djin <djin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 15:38:20 by djin              #+#    #+#             */
-/*   Updated: 2023/08/22 09:42:18 by codespace        ###   ########.fr       */
+/*   Updated: 2023/09/02 20:12:18 by djin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ typedef struct s_list
 
 int			ft_atoi(const char *str);
 
-int			ft_isalpha(int a);
+int			ft_isalpha(char a);
 
 void		ft_bzero(void *s, size_t n);
 
