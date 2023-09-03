@@ -5,7 +5,7 @@ t_token *create_token(char *cmd, int type)
 	t_token	*newnode;
 
 	newnode = malloc(sizeof(t_token));
-	if (!newnode)
+	if (newnode == NULL)
 		return (NULL);
 	newnode -> cmd = cmd;
 	newnode -> type = type;
@@ -24,10 +24,23 @@ t_token	*add_tokens(t_token *tokens, char *input, int type)
 		return (NULL);
 	if (!(tokens))
 		return (new);
-	tokens = malloc(sizeof(t_token));
+	// tokens = malloc(sizeof(t_token));
 	tokens -> next = new;
 	new -> prev = tokens;
 	return (new);
+}
+
+t_token	*lst_first_last(t_token *tokens, bool is_last)
+{
+	if (is_last == true)
+	{
+		while (tokens -> next != NULL && tokens != NULL)
+			tokens = tokens -> next;
+		return (tokens);
+	}
+	while (tokens -> prev != NULL && tokens != NULL)
+		tokens = tokens -> prev;
+	return (tokens);
 }
 
 void	ft_lstclear_token(t_token **lst, void (*del)(void *))
@@ -47,5 +60,20 @@ void	ft_lstclear_token(t_token **lst, void (*del)(void *))
 		free(prevnode);
 	}
 	*lst = newnode;
+}
+
+void	print_stack(t_token *tokens)
+{
+	tokens = lst_first_last(tokens, false);
+	while (tokens)
+	{
+		if (tokens != NULL)
+		{
+			printf("stack_a: %s\n", tokens->cmd);
+			printf("stack_a type: %d\n", tokens->type);
+			printf("stack_a address: %p\n", tokens);
+			tokens = tokens->next;
+		}
+	}
 }
 

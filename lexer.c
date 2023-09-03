@@ -15,6 +15,8 @@ void	parse_input(char *input, char **envp)
 	i = 0;
 	j = 0;
 	tokens = (t_token **)malloc(sizeof(t_token *));
+	(*tokens) = NULL;
+	// printf("tokens->firstaddress %p\n", (*tokens));
 	while (input[i])
 	{
 		count_words = 0;
@@ -42,10 +44,8 @@ void	parse_input(char *input, char **envp)
 			}
 			(*tokens) = add_tokens(*tokens, ft_substr(input, j, count_words), DIGIT);
 		}
-		else
-			i++;
 	}
-	printf("tokens->type: %d\n", (*tokens)->type);
+	print_stack(*tokens);
 }
 
 int	main(int argc, char **argv, char **envp)

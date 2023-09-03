@@ -33,12 +33,13 @@ typedef struct s_token
 char		*ft_strtok(char *str, const char *delim);
 
 // Token linked listfunctions
-t_token		*first_last_token(t_token **tokens, bool is_last);
+t_token		*lst_first_last(t_token *tokens, bool is_last);
 void		token_lstadd_back(t_token **lst, t_token *new);
 t_token		*add_tokens(t_token *tokens, char *cmd, int type);
 t_token		*create_token(char *cmd, int type);
 void		ft_lstclear_token(t_token **lst, void (*del)(void *));
 void		del(void *content);
+void		print_stack(t_token *tokens);
 
 // Lexer utils
 void		check_type(char *input);
