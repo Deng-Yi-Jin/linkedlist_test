@@ -22,10 +22,10 @@ void	parse_input(char *input, char **envp)
 		count_words = 0;
 		if (input[i] == ' ' || input[i] == '\t')
 			i++;
-		if (ft_isalpha(input[i]) == true && input[i] != '\0')
+		if ((ft_isalpha(input[i]) == true || ft_isdigit(input[i]) == true) && input[i] != '\0')
 		{
 			j = i;
-			while (ft_isalpha(input[i]) == true && input[i] != '\0')
+			while ((ft_isalpha(input[i]) == true || ft_isdigit(input[i]) == true) && input[i] != '\0')
 			{
 				i++;
 				count_words++;
@@ -34,18 +34,11 @@ void	parse_input(char *input, char **envp)
 		}
 		if (ft_symbol(input[i]) == true && input[i] != '\0')
 			is_symbol(input, &i, tokens);
-		if (ft_isdigit(input[i]) == true && input[i] != '\0')
-		{
-			j = i;
-			while (ft_isdigit(input[i]) == true && input[i] != '\0')
-			{
-				i++;
-				count_words++;
-			}
-			(*tokens) = add_tokens(*tokens, ft_substr(input, j, count_words), DIGIT);
-		}
 	}
 	print_stack(*tokens);
+	lst_first_last(*tokens, false);
+	free_stack(tokens, del);
+	free(tokens);
 }
 
 int	main(int argc, char **argv, char **envp)
